@@ -1,18 +1,25 @@
 {
-    "presets": ["next/babel"],
-    "plugins": [
+  "presets": [
+    "next/babel"
+  ],
+  "plugins": [
+      "@babel/plugin-proposal-optional-chaining",
+      "@babel/plugin-proposal-nullish-coalescing-operator",
       [
-          "module-resolver",
-          {
-              "root": ["."],
-              "alias": {
-                //   "@utils": "./utils",   // will connect to all utiliy related functions
-                  "@components": "./components",  // to all defined components
-                  "@firebase": "./firebase",  // to all defined components
-                //   "@widgets": "./components/widgets",  //  to all defined widget components
-                  "@reducers": "./redux-store/reduxReducers"  //  redux related files like-  actions, reducers
-              }
-          }
-      ]
+      "module-resolver",
+      {
+        "root": [
+          "."
+        ],
+        "alias": {
+          //   "@utils": "./utils",   // will connect to all utiliy related functions
+          "@components": "./components", // to all defined components
+          "@fb": "./firebase", // to all defined components
+          "@store": "./redux-store/store.js", //  to all defined widget components
+          "@styles": "./styles", //  to all defined widget components
+          "@reducers": "./redux-store/reduxReducers" //  redux related files like-  actions, reducers
+        }
+      }
     ]
-  }
+  ]
+}

@@ -61,7 +61,7 @@ store.subscribe(throttle(() => {
   console.log("STATE_LENGTH", store.getState());
   // save state in local storage
   saveState({
-   Session: store.getState().Session
+    Auth: store.getState().Auth
   });
 }, 1000));
 

@@ -1,40 +1,115 @@
-import Head from 'next/head'
+import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 
-import { setSession } from '../redux-store/reduxReducers/sessionReducer';
+/** Actions */
+import { signIn, clearLoginError, fetchUser } from '@reducers/authReducer';
 
-const Home = ()  => {
+/** Semnatic Component */
+import { Input, Button, Header, Form, Segment, Icon, Message } from 'semantic-ui-react';
+
+/** Other Components */
+import Loader from '@components/Loader'
+
+
+const Home = (props) => {
+  const router = useRouter();
+  const Auth = useSelector(state => state.Auth);
   const dispatch = useDispatch();
-  useEffect(() => {
-      dispatch(setSession())
-  }, [dispatch]);
-  const Session = useSelector(state => state.Session);
 
-  console.log("Session", Session);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+
+  useEffect(() => {
+    if (Auth.loggedIn) {
+      if (Auth.info?.uid) {
+        dispatch(fetchUser());
+      }
+      router.push('/dashboard');
+    }
+  });
+
+  const handleEmailChange = (e, data) => {
+    setEmail(data.value);
+  }
+
+  const handlePasswordChange = (e, data) => {
+    setPassword(data.value);
+  }
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    dispatch(signIn(email, password));
+  }
+
+  const handleClose = () => {
+    setEmail("");
+    setPassword("");
+    dispatch(clearLoginError());
+  };
 
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>SubHub Super Admin</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <Segment basic textAlign="center" >
+        <Header as="h1" className="title">
+          Welcome to Subhub
+        </Header>
+        <h3>
+          SUBHUB SUPER ADMIN
+        </h3>
+        <Form size="small" error={Auth?.error?.flag}>
+          <Message
+            size="small"
+            error
+            header='Login Failed !!'
+            content={Auth?.error?.msg?.message}
+          />
+          <Form.Group grouped >
+            <Input
+              fluid
+              value={email}
+              onChange={(e, data) => handleEmailChange(e, data)}
+              size="mini"
+              label={{
+                icon: <Icon.Group>
+                  <Icon size="big" color="grey" name="user circle" />
+                  <Icon corner='top right' name="star" color="red" size="tiny" />
+                </Icon.Group>,
+              }}
+              labelPosition='left'
+              type="text" placeholder="User Email" />
+            <br />
+            <Input
+              fluid
+              value={password}
+              onChange={(e, data) => handlePasswordChange(e, data)}
+              size="mini"
+              label={{
+                icon: <Icon.Group>
+                  <Icon size="big" color="grey" name="lock" />
+                  <Icon corner='top right' name="star" color="red" size="tiny" />
+                </Icon.Group>,
+              }}
+              labelPosition='left'
+              type="password" placeholder="Password" />
+          </Form.Group>
+          <Button fluid primary onClick={(e) => handleLogin(e)}> Login </Button>
+        </Form>
+        <Link href="/forgot_password">
+          <a className="forgot-pass"> Forgot Password ?</a>
+        </Link>
 
-        {
-          Session.loggedIn &&
-          <p className="description">
-            Get started by editing <code>pages/index.js</code>
-            {Session.loggedIn}
-          </p>
-        }
-        </main>
+      </Segment>
 
-      <footer>
+      {/* <footer>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
@@ -43,7 +118,7 @@ const Home = ()  => {
           Powered by{' '}
           <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
         </a>
-      </footer>
+      </footer> */}
 
       <style jsx>{`
         .container {
@@ -55,15 +130,7 @@ const Home = ()  => {
           align-items: center;
         }
 
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
+      
         footer {
           width: 100%;
           height: 100px;
@@ -83,10 +150,7 @@ const Home = ()  => {
           align-items: center;
         }
 
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
+        
 
         .title a {
           color: #0070f3;
@@ -105,93 +169,27 @@ const Home = ()  => {
           font-size: 4rem;
         }
 
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
+        
 
         .logo {
           height: 1em;
         }
 
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
+        a.forgot-pass {
+          margin-top: 12px;
+          color: #4d4d4d;
+          font-weight: 550;
+          font-size: 12px;
         }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
+        a.forgot-pass:hover,
+        a.forgot-pass:focus,
+        a.forgot-pass:active {
+          text-decoration: underline;
         }
 
-        * {
-          box-sizing: border-box;
-        }
       `}</style>
     </div>
   )
 }
 
-export default Home
+export default Home;

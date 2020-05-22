@@ -1,13 +1,14 @@
 /** CSS Imports */
-// import '../semantic/dist/semantic.min.css';
+import '../semantic/dist/semantic.min.css';
+import '@styles/global.scss';
 
-import Layout from '../components/Layout'
-
+import { Provider } from 'react-redux';
+import store from '@store';
 
 export default function App({ Component, pageProps }) {
-  return (
-    <Layout>
+    return (
+    <Provider store={store}>
       <Component {...pageProps} />
-    </Layout>  
-  );
-}
+    </Provider>  
+    )
+  }

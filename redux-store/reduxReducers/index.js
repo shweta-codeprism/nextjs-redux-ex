@@ -1,10 +1,12 @@
 /* @flow */
 
 import { combineReducers } from 'redux';
-import { sessionReducer } from './sessionReducer';
+import { authReducer } from './authReducer';
+import { passwordReducer } from './passwordReducer';
 
 const reducers = combineReducers({
-  Session: sessionReducer
+  Auth: authReducer,
+  Password: passwordReducer
 });
 
 export default reducers;

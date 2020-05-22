@@ -4,17 +4,24 @@ import 'firebase/storage';
 import 'firebase/auth';
 import 'firebase/analytics';
 
-import { FirebaseConfig }   from "./config";
+import { FirebaseConfig } from "./config";
 
-firebase.initializeApp(FirebaseConfig);
+
+// Check that `window` is in scope for the analytics module!
+if (!firebase.apps.length) {
+    firebase.initializeApp(FirebaseConfig)
+    firebase.analytics();
+}
 
 const databaseRef = firebase.database().ref();
 export const authRef = firebase.auth();
 
 export const FIREBASE_AUTH_PERSIST = firebase.auth.Auth.Persistence.LOCAL;
 
+export const singleUserRef = (uid) => databaseRef.child("users/" + uid);
 export const vendors = databaseRef.child("vendors");
 export const vendorDetails = databaseRef.child("vendorDetails");
+
 // export const carTypesRef = databaseRef.child("rates/car_type");
 // export const promoRef = databaseRef.child("offers");
 // export const promoEditRef = (id) => databaseRef.child("offers/"+ id);

@@ -1,0 +1,25 @@
+/*******************************
+         Site Overrides
+*******************************/
+@default-theme: #f04452;
+@text-colors: blue, green, orange, pink, violet, olive, purple, red, teal, yellow, black, brown, grey, white, default-theme;
+.text {
+    .-(@i: length(@text-colors)) when (@i > 0) {
+        @c: extract(@text-colors, @i);
+        &.@{c} { color: @@c }
+        .-((@i - 1));
+    }.-;
+}
+
+@font10: 10px;
+@font12: 12px;
+@font15: 15px;
+@font20: 20px;
+@text-fonts: font10, font12, font15, font20 ;
+.text {
+    .-(@i: length(@text-fonts)) when (@i > 0) {
+        @c: extract(@text-fonts, @i);
+        &.@{c} { font-size: @@c }
+        .-((@i - 1));
+    }.-;
+}
