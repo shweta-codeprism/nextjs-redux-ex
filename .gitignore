@@ -34,4 +34,4 @@ yarn.lock
 package-lock.json
 
 #semantic
-/semantic
+/semantic/dist
