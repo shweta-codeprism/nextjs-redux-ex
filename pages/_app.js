@@ -1,5 +1,5 @@
 /** CSS Imports */
-import '../semantic/dist/semantic.min.css';
+// import '../semantic/dist/semantic.min.css';
 
 import Layout from '../components/Layout'
 
