@@ -31,7 +31,6 @@ yarn-error.log*
 
 # lock
 yarn.lock
-package-lock.json
 
 #semantic
-/semantic/dist
+/semantic/dist/*
