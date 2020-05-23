@@ -25,9 +25,9 @@ const Home = (props) => {
 
   useEffect(() => {
     if (Auth.loggedIn) {
-      if (Auth.info?.uid) {
-        dispatch(fetchUser());
-      }
+      // if (Auth.info?.uid) {
+      //   dispatch(fetchUser());
+      // }
       router.push('/dashboard');
     }
   });

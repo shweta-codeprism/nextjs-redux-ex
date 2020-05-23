@@ -1,0 +1,243 @@
+// @import "../../../styles/global.scss";
+
+$iconWidth: 40px;
+$titleTextWidth: 160px;
+
+
+
+
+.menu_item {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 15px !important;
+  font-weight: 400px !important;
+}
+
+.menu_item_active {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 15px !important;
+  border: 0 !important;
+  height: 40px !important;
+  border-left: 2px #fa5959 solid!important;
+  background-color: #e0e0e0 !important;
+  box-shadow: none !important;
+  position: initial !important;
+  font-weight: bold;
+  color: #000000 !important;
+}
+
+.menu_icon_blk {
+  width: $iconWidth !important;
+  font-size: 20px !important;
+}
+
+.menu_icon_blk_active {
+  width: $iconWidth !important;
+  font-size: 20px !important;
+  color: #fa5959
+}
+
+// .title-blk {
+//   width: $sidebarWidth !important;
+//   border-bottom: none !important;
+//   box-shadow: none !important;
+//   padding: 5px !important;
+//   height: 40px !important;
+//   background-color: transparent !important;
+//   position: initial !important;
+//   vertical-align: middle !important;
+//   &:hover {
+//     height: 40px !important;
+//     width: $sidebarWidth !important;
+//     border-bottom: none !important;
+//     box-shadow: none !important;
+//     position: initial !important;
+//     vertical-align: middle !important;
+//     background-color: #2e3b50 !important;
+//   }
+// }
+
+// .title-blk-invisible {
+//   height: 40px !important;
+//   padding: 5px !important;
+//   width: 60px !important;
+//   position: initial !important;
+//   border-bottom: none !important;
+//   box-shadow: none !important;
+//   display: flex !important;
+//   flex-direction: row;
+//   align-items: center;
+//   background-color: transparent !important;
+// }
+
+// .active-title-blk-invisible {
+//   height: 40px !important;
+//   padding: 5px !important;
+//   width: 60px !important;
+//   position: initial !important;
+//   border-left: 2px #fa5959 solid!important;
+//   box-shadow: none !important;
+//   display: flex !important;
+//   flex-direction: row;
+//   align-items: center;
+//   background-color: #000000 !important;
+// }
+
+
+// .active-title-blk {
+//   width: $sidebarWidth !important;
+//   border: 0 !important;
+//   height: 40px !important;
+//   border-left: 2px #fa5959 solid!important;
+//   background-color: #ececec !important;
+//   box-shadow: none !important;
+//   position: initial !important;
+// }
+
+// .icon-blk {
+//   width: $iconWidth !important;
+//   font-size: 20px !important;
+// }
+
+// .active-icon-blk {
+//   width: $iconWidth !important;
+//   font-size: 20px !important;
+//   color: #fa5959 !important;
+// }
+
+// .title-text-blk {
+//   width: $titleTextWidth !important;
+// }
+
+// .invisible-title-text-blk {
+//   visibility: hidden !important;
+//   width: 0 !important;
+// }
+
+// .active-title-text-blk {
+//   width: $titleTextWidth !important;
+//   font-weight: bold;
+//   color: #000000 !important;
+// }
+
+// // .drpdwn-icon-blk {
+// //   width: $dropIconWidth !important;
+// // }
+
+// .SideMenuDiv {
+//   position: absolute !important;
+//   top: 50 !important;
+//   bottom: 0px !important;
+//   left: 0 !important;
+//   width: 100% !important;
+//   height: calc(100vh - #{$topmenuHeight}) !important;
+//   display: flex !important;
+//   flex-direction: column;
+//   border: none !important;
+//   border-radius: 0 !important;
+// }
+
+// .SideBarStyle {
+//   z-index: 3 !important;
+//   border: none !important;
+//   margin-right: -1px !important;
+//   padding-right: 5px !important;
+//   width: 50px !important;
+//   // overflow: visible !important;
+//   // background-color: #2d373c !important;
+// }
+
+// .PusherStyle {
+//   height: calc(100vh - #{$topmenuHeight} - 10px) !important;
+//   width: calc( 100vw - 60px) !important;
+//   background-color: #FFFFFF !important;
+// }
+
+// .PusherContentStyle {
+//   height: calc(100vh - #{$topmenuHeight} - 35px) !important;
+//   padding: 0 !important;
+//   margin-top: 0 !important;
+// }
+
+// .MenuHeader {
+//   height: 100%;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: flex-start;
+//   align-items: center;
+//    // background: #ececec !important;
+//   padding-left: 0 !important;
+//   padding-right: 0 !important;
+//   width: $sidebarWidth !important;
+
+// }
+
+// .MenuHeaderOpen {
+//   height: 100%;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: flex-start;
+//   align-items: center;
+//    // background: #ececec !important;
+//   padding-left: 0 !important;
+//   background: #1b1c1d !important;
+//   border-bottom: 1px #1b1c1d solid !important;
+//   padding-right: 0 !important;
+//   width: $sidebarWidth !important;
+// }
+
+// .MainLogoHeader {
+//   height: 100%;
+//   width: 60px !important;
+//   display: flex;
+//   padding: 5px;
+//   flex-direction: row;
+//   justify-content: center;
+//   align-items: center;
+//   background: #1b1c1d !important;
+//   padding-left: 5px !important;
+//   padding-right: 10px !important;
+//   height: 50px !important;
+// }
+
+// .PublicLogoHeader {
+//   padding-left: 10px !important;
+//   padding-right: 0 !important;
+//   height: 35px !important;
+// }
+
+// .top-menu-style {
+//   height: 50px;
+//   border-bottom: 1px #e0e0e0 solid !important;
+//   box-shadow: none !important;
+//   background-color: #f8f7f7 !important;
+//   position: initial !important;
+// }
+
+// .TopMenuStyleLeft {
+//   height: 50px;
+//   width: $sidebarWidth !important;
+//   border: none !important;
+//   box-shadow: none !important;
+//   background: #ffffff !important;
+//   position: initial !important;
+// }
+
+// .MenuInvertedButton:hover {
+//   border: none !important;
+//   box-shadow: none !important;
+//   background: white !important;
+//   color: #000000 !important;
+// }
+
+// .MenuInvertedButton:not( :hover) {
+//   background-color: transparent !important;
+//   border: none !important;
+//   box-shadow: none !important;
+//   color: #fa5959 !important;
+// }

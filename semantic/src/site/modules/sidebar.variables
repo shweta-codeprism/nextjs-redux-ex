@@ -1,3 +1,7 @@
 /*******************************
          Site Overrides
 *******************************/
+@width: 220px;
+@veryWideWidth: 80vw;
+@wideWidth: 50vw;
+@thinWidth: 220px;

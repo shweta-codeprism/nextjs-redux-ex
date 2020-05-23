@@ -16,7 +16,7 @@
           "@components": "./components", // to all defined components
           "@fb": "./firebase", // to all defined components
           "@store": "./redux-store/store.js", //  to all defined widget components
-          "@styles": "./styles", //  to all defined widget components
+          "@allstyles": "./styles", //  to all defined widget components
           "@reducers": "./redux-store/reduxReducers" //  redux related files like-  actions, reducers
         }
       }

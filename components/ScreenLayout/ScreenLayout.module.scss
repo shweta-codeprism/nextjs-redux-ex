@@ -1,4 +1,33 @@
+$sidebarWidth: 220px;
+$topMenuHeight: 20px;
+
 .top_menu_style {
     background-color: whitesmoke !important;
     color: darkslategray !important;
+}
+
+.side_menu_custom {
+
+}
+
+.side_menu_pusher {
+    width: calc(100vw - #{$sidebarWidth}) !important;
+} 
+
+.side_menu_pusher_content {
+   padding-top: $topMenuHeight !important;
+   height: calc(100vh - #{$topMenuHeight}) !important;
+}
+
+.menu_item_header {
+    z-index: 1000 !important;
+}
+
+.menu_item_header:before {
+    background: none !important;
+}
+
+.second_menu {
+    // background: #dadadc !important;
+    width: 100%
 }

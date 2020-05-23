@@ -10,14 +10,27 @@ import { signIn, clearLoginError } from '@reducers/authReducer';
 import { Input, Button, Header, Form, Segment, Icon, Message } from 'semantic-ui-react';
 
 /** Other Components */
-import Loader from '@components/Loader';
-import ScreenContentLayout from '@components/ScreenContentLayout';
+import Loader from '@components/Loader'
+import ScreenLayout from '@components/ScreenLayout/ScreenLayout'
+
 
 const Dashboard = ({ props }) => {
 
   return (
-    <ScreenContentLayout pageTitle="Dashboard">
-    </ScreenContentLayout>
+    <ScreenLayout>
+      <div>
+        <Head>
+          <title>SubHub Super Admin</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+
+        <Segment basic textAlign="center" style={{ height: '100vh' }} >
+
+
+
+        </Segment>
+      </div>
+    </ScreenLayout>
   )
 }
 

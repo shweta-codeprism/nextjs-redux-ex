@@ -19,6 +19,8 @@ export const authRef = firebase.auth();
 export const FIREBASE_AUTH_PERSIST = firebase.auth.Auth.Persistence.LOCAL;
 
 export const singleUserRef = (uid) => databaseRef.child("users/" + uid);
+export const categoriesRef = databaseRef.child("categories");
+export const subCategoriesRef = databaseRef.child("subCategories");
 export const vendors = databaseRef.child("vendors");
 export const vendorDetails = databaseRef.child("vendorDetails");
 

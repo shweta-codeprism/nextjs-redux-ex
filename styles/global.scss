@@ -12,16 +12,26 @@ body {
   box-sizing: border-box;
 }
 
-a {
-  color: #f300be;
-  text-decoration: none;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
-a:hover {
-  text-decoration: underline;
+::-webkit-scrollbar {
+  width: 8px !important;
 }
 
-img {
-  max-width: 100%;
-  display: block;
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
