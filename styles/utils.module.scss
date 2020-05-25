@@ -46,3 +46,36 @@
 .bg_t {
   background: transparent !important;
 }
+
+/** coomom- flex-displays **/
+.d_f {
+  display: flex !important;
+}
+
+.fd_r {
+  flex-direction: row !important;
+}
+
+.fd_c {
+  flex-direction: column !important;
+}
+
+.jc_s {
+  justify-content: flex-start !important;
+}
+
+.jc_c {
+  justify-content: center !important;
+}
+
+.jc_e {
+  justify-content: end !important;
+}
+
+.jc_sb {
+  justify-content: space-between !important;
+}
+
+.ai_c {
+  align-items: center !important;
+}

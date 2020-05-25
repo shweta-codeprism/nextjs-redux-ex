@@ -23,6 +23,7 @@ const middleware = [
 const enhancers = [];
 
 // composeWithDevtools - for Redux State Debugging in browser ( Don't Change It)
+// for Dev on
 const composedEnhancers = composeWithDevTools(
   applyMiddleware(...middleware),
   ...enhancers,

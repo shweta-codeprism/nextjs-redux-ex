@@ -18,15 +18,14 @@ import AddCategory from '@components/Categories/AddCategory';
 const Category = ({ props }) => {
   const dispatch = useDispatch();
 
+  const Categories = useSelector(state => state.Categories);
+  const categories = Categories.categories;
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  const Categories = useSelector(state => state.Categories);
-  const categories = Categories.categories;
-
   if (categories) {
-    console.log("GJHKHK", Object.keys(categories));
+    console.log("Opend the SC Window-GJHKHK", Object.keys(categories));
   }
   // console.log("GJHKHK", ...categories);
 
@@ -40,9 +39,12 @@ const Category = ({ props }) => {
           <Card.Group itemsPerRow={5} doubling>
             {
               categories && Object.keys(categories).length !== 0 &&
-              Object.keys(categories).map(categoryKey =>
-                <CategoryCard key={categoryKey} category={categories[categoryKey]} />
-              )
+              Object.keys(categories).map(categoryKey => {
+                console.log("CATEGORY-SNAP-CK", categoryKey);
+                return (
+                  <CategoryCard key={categoryKey} categoryKey={categoryKey} category={categories[categoryKey]} />
+                )
+              })
             }
           </Card.Group>
       }

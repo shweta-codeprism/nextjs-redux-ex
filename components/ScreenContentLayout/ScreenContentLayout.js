@@ -16,6 +16,7 @@ import ScreenLayout from '../ScreenLayout';
 
 const ScreenContentLayout = ({ pageTitle, addModalContent, ...props }) => {
     const [openD, setOpenD] = useState(false);
+    
 
     return (
         <ScreenLayout>

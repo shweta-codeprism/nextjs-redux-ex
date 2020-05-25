@@ -12,8 +12,10 @@ import AddCategory from '../AddCategory';
 import CategoryDetails from '../CategoryDetails';
 
 
-const CategoryCard = ({ category }) => {
+const CategoryCard = ({ key, category, categoryKey }) => {
     const [openD, setOpenD] = useState(false);
+
+    console.log("CATEGORY-SNAP", categoryKey);
 
     return (
         <Modal trigger={
@@ -29,6 +31,7 @@ const CategoryCard = ({ category }) => {
                 <Card.Content className={utilStyles.p_5}>
                     <div className={styles.category_header}>
                         <h5 textAlign="right" className={utilStyles.m_0}>{category.name}</h5>
+                        {/* <h6>{`${category.commission} ${category.commissionMode} Commission`}</h6> */}
                         <div className={styles.category_details}>
                             <Label size="mini" icon="box">
                                 <Icon name='box' />
@@ -60,7 +63,7 @@ const CategoryCard = ({ category }) => {
                     </Menu.Menu>
                 </Menu>
             </Modal.Header>
-            <CategoryDetails category={category} />
+            <CategoryDetails categoryKey={categoryKey} category={category} />
 
         </Modal>
     )

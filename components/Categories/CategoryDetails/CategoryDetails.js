@@ -1,11 +1,27 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 /** Semantic Imports */
 import { Card, Header, Segment, Image, Label, Icon, Grid } from 'semantic-ui-react';
 
 /** CSS Imports*/
 import styles from './CategoryDetails.module.scss';
+import utilStyles from '../../../styles/utils.module.scss';
 
-const AddCategory = ({ category }) => {
+/** Actions */
+import { addSubCategory, fetchSubCategories } from '../../../redux-store/reduxReducers/subCategoryReducer';
+
+const CategoryDetails = ({ categoryKey, category }) => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchSubCategories(categoryKey));
+    }, [dispatch]);
+
+    const SubCategories = useSelector(state => state.SubCategories);
+    const subCategories = SubCategories.subCategories;
+
     return (
         <Segment basic className={styles.details_content}>
             <div>
@@ -27,69 +43,25 @@ const AddCategory = ({ category }) => {
                     Sub-Categories:
                 </Header>
                 <Grid columns={3}>
-                    <Grid.Column>
-                        <Label>
-                            Sports
-                            <Icon name="close" />
-                        </Label>
-                    </Grid.Column>
-                    <Grid.Column>
-                        <Label>
-                            Sports
-                            <Icon name="close" />
-                        </Label>
-                    </Grid.Column>
-                    <Grid.Column>
-                        <Label>
-                            Sports
-                            <Icon name="close" />
-                        </Label>
-                    </Grid.Column>
-                    <Grid.Column>
-                        <Label>
-                            Sports
-                            <Icon name="close" />
-                        </Label>
-                    </Grid.Column>
-                    <Grid.Column>
-                        <Label>
-                            Sports
-                            <Icon name="close" />
-                        </Label>
-                    </Grid.Column>
-                    <Grid.Column>
-                        <Label>
-                            Sports
-                            <Icon name="close" />
-                        </Label>
-                    </Grid.Column>
-                    <Grid.Column>
-                        <Label>
-                            Sports
-                            <Icon name="close" />
-                        </Label>
-                    </Grid.Column>
-                    <Grid.Column>
-                        <Label>
-                            Health & Supplements
-                            <Icon name="close" />
-                        </Label>
-                    </Grid.Column>
-                    <Grid.Column>
-                        <Label>
-                            Sports
-                            <Icon name="close" />
-                        </Label>
-                    </Grid.Column>
-
-
-
+                    {
+                        subCategories && Object.keys(subCategories).length > 0 &&
+                        Object.keys(subCategories).map(subCatKey => (
+                            <Grid.Column>
+                                <Label style={{ display: 'flex', flexDirection: 'row' }} >
+                                    {
+                                        subCategories[subCatKey].name
+                                    }
+                                    <Icon name="close" />
+                                </Label>
+                            </Grid.Column>
+                        ))
+                    }
                 </Grid>
 
             </div>
-        </Segment>
+        </Segment >
     )
 
 }
 
-export default AddCategory;
+export default CategoryDetails;

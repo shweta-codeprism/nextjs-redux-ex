@@ -1,4 +1,8 @@
-import { subCategoriesRef } from "@fb/firebase";
+/** Constants */
+import { API_TYPES } from '@gc';
+
+/** db references */
+import { subCategoriesRef, categoryNamesRef } from "@fb/firebase";
 
 const SUBCATEGORY = Object.freeze({
     CREATE_SUBCATEGORY: 'CREATE_SUBCATEGORY',
@@ -7,25 +11,27 @@ const SUBCATEGORY = Object.freeze({
     FETCH_SUBCATEGORIES: 'FETCH_SUBCATEGORIES',
     FETCH_SUBCATEGORIES_SUCCESS: 'FETCH_SUBCATEGORIES_SUCCESS',
     FETCH_SUBCATEGORIES_FAILED: 'FETCH_SUBCATEGORIES_FAILED',
+    RESET_SUBCATEGORIES: 'RESET_SUBCATEGORIES'
 });
 
 
 export const INITIAL_STATE = {
-    subCategories: null,
+    subCategories: {},
     loading: false,
     error: {
         flag: false,
-        msg: null
+        msg: null,
+        mode: ''
     }
 }
 
-export const fetchSubCategories = () => dispatch => {
+export const fetchSubCategories = (categoryId) => dispatch => {
     dispatch({
         type: SUBCATEGORY.FETCH_SUBCATEGORIES,
         payload: null
     });
 
-    subCategoriesRef.on("value", snapshot => {
+    subCategoriesRef.orderByChild("categoryId").equalTo(categoryId).on("value", snapshot => {
         if (snapshot.val()) {
             dispatch({
                 type: SUBCATEGORY.FETCH_SUBCATEGORIES_SUCCESS,
@@ -35,7 +41,7 @@ export const fetchSubCategories = () => dispatch => {
             dispatch({
                 type: SUBCATEGORY.FETCH_SUBCATEGORIES_FAILED,
                 payload: {
-                    message: "No SubCategories Available."
+                    message: "No Categories Available."
                 }
             });
         }
@@ -47,7 +53,35 @@ export const addSubCategory = (subCategory) => dispatch => {
         type: SUBCATEGORY.CREATE_SUBCATEGORY,
         payload: null
     });
-    subCategoriesRef.push().set(subCategory);
+    const subCategoriesPushRef = subCategoriesRef.push();
+    const newSubCategoryKey = subCategoriesPushRef.key;
+    subCategoriesPushRef.set(subCategory)
+        .then(() => {
+            // categoryNamesRef.child(category.name).set(newCategoryKey)
+            //     .then(() => {
+            dispatch({
+                type: SUBCATEGORY.CREATE_SUBCATEGORY_SUCCESS,
+                payload: null
+            });
+            // }).catch(error => {
+            //     subCategoriesRef.child(newCategoryKey).remove();
+            //     dispatch({
+            //         type: SUBCATEGORY.CREATE_SUBCATEGORY_FAILED,
+            //         payload: {
+            //             message: "The Category Name already Exists. Please Try Another Name!!"
+            //         }
+            //     });
+            // });
+        })
+        .catch(error => {
+            console.log("CAT-SNAP-E", error);
+            dispatch({
+                type: SUBCATEGORY.CREATE_SUBCATEGORY_FAILED,
+                payload: {
+                    message: "The Sub Category Name already Exists. Please Try Another Name!!"
+                }
+            });
+        });
 }
 
 export const subCategoryReducer = (state = INITIAL_STATE, action) => {
@@ -61,7 +95,12 @@ export const subCategoryReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 subCategories: action.payload,
-                loading: false
+                loading: false,
+                error: {
+                    flag: false,
+                    msg: null,
+                    mode: ""
+                }
             };
         case SUBCATEGORY.FETCH_SUBCATEGORIES_FAILED:
             return {
@@ -70,13 +109,24 @@ export const subCategoryReducer = (state = INITIAL_STATE, action) => {
                 loading: false,
                 error: {
                     flag: true,
-                    msg: action.payload
+                    msg: action.payload,
+                    mode: API_TYPES.GET_LIST
                 }
             };
         case SUBCATEGORY.CREATE_SUBCATEGORY:
             return {
                 ...state,
                 loading: true
+            };
+        case SUBCATEGORY.CREATE_SUBCATEGORY_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: {
+                    flag: false,
+                    msg: null,
+                    mode: ""
+                }
             };
         case SUBCATEGORY.CREATE_SUBCATEGORY_FAILED:
             return {
@@ -85,7 +135,8 @@ export const subCategoryReducer = (state = INITIAL_STATE, action) => {
                 loading: false,
                 error: {
                     flag: true,
-                    msg: action.payload
+                    msg: action.payload,
+                    mode: API_TYPES.POST
                 }
             };
         default:
