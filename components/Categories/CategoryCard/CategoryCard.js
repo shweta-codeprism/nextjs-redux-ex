@@ -55,7 +55,6 @@ const CategoryCard = ({ key, category, categoryKey }) => {
                                             color="grey" />
                                     }
                                     on="click"
-        
                                 >
                                     <Popup.Content>
                                         <Menu vertical secondary>
