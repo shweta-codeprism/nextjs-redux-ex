@@ -7,11 +7,12 @@ $topMenuHeight: 20px;
 }
 
 .side_menu_custom {
-
+    width: $sidebarWidth !important;
 }
 
 .side_menu_pusher {
     width: calc(100vw - #{$sidebarWidth}) !important;
+    margin-left: 73px !important;
 } 
 
 .side_menu_pusher_content {

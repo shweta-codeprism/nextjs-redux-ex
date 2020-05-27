@@ -1,6 +1,0 @@
-/*******************************
-     User Global Variables
-*******************************/
-@headerFont        : 'Proxima Nova',sans-serif;
-@pageFont          : 'Proxima Nova',sans-serif;
-@googleFontFamily  : 'Open+Sans:400italic,400|Oswald:400,700';

@@ -1,7 +1,10 @@
 import { useState } from 'react';
 
 /** Semantic Imports */
-import { Card, Image, Button, Header, Label, Icon, Modal, Menu } from 'semantic-ui-react';
+import {
+    Card, Image, Button, Header, Label,
+    Icon, Divider, Modal, Menu, Popup, Dropdown
+} from 'semantic-ui-react';
 
 /** CSS Imports */
 import utilStyles from '../../../styles/utils.module.scss';
@@ -35,14 +38,53 @@ const CategoryCard = ({ key, category, categoryKey }) => {
                         <h5 textAlign="right" className={utilStyles.m_0}>{category.name}</h5>
                         {/* <h6>{`${category.commission} ${category.commissionMode} Commission`}</h6> */}
                         <div className={styles.category_details}>
-                            <Label size="mini" icon="box">
-                                <Icon name='box' />
-                                23
-                            </Label>
-                            <Label size="mini">
-                                <Icon name='user' />
-                                23
-                            </Label>
+                            <div className={cx(utilStyles.d_f, utilStyles.jc_s, styles.category_numbers)}>
+                                <Label size="mini" icon="box">
+                                    <Icon name='box' />
+                                    23
+                                </Label>
+                                <Label size="mini">
+                                    <Icon name='user' />
+                                    23
+                                </Label>
+                            </div>
+                            <div className={cx(utilStyles.d_f, utilStyles.jc_e, styles.category_update)}>
+                                <Popup
+                                    trigger={
+                                        <Icon name='ellipsis vertical'
+                                            color="grey" />
+                                    }
+                                    on="click"
+        
+                                >
+                                    <Popup.Content>
+                                        <Menu vertical secondary>
+                                            <Menu.Item>
+                                                <Button size="mini" primary className={utilStyles.p_5}>Edit</Button>
+                                            </Menu.Item>
+                                            <Menu.Item>
+                                                <Button size="mini" primary className={utilStyles.p_5}>Edit</Button>
+                                            </Menu.Item>
+                                        </Menu>
+                                    </Popup.Content>
+                                </Popup>
+
+                                {/* <Dropdown
+                                    pointing="left"
+                                    icon={<Icon name='ellipsis vertical'
+                                        color="grey" />}
+                                >
+                                    <Dropdown.Menu>
+                                        <div className={utilStyles.p_5}>
+                                            <Button size="mini" primary className={utilStyles.p_5}>Edit</Button>
+                                        </div>
+                                        <Divider />
+                                        <div className={utilStyles.p_5}>
+                                            <Button size="mini" negative className={utilStyles.p_5}>Delete</Button>
+                                        </div>
+                                    </Dropdown.Menu>
+                                </Dropdown> */}
+                            </div>
                         </div>
                     </div>
                 </Card.Content>

@@ -18,11 +18,12 @@ import AddCategory from '@components/Categories/AddCategory';
 const Category = ({ props }) => {
   const dispatch = useDispatch();
 
-  const Categories = useSelector(state => state.Categories);
-  const categories = Categories.categories;
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
+
+  const Categories = useSelector(state => state.Categories);
+  const categories = Categories.categories;
 
   if (categories) {
     console.log("Opend the SC Window-GJHKHK", Object.keys(categories));

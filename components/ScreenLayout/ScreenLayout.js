@@ -49,6 +49,7 @@ const ScreenLayout = (props) => {
                 vertical
                 visible
                 width="thin"
+                className={styles.side_menu_custom}
             >
                 <Menu.Item as='a' header className={styles.menu_item_header}>
                     SUBHUB SUPERADMIN
