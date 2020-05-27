@@ -8,6 +8,9 @@ const CATEGORY = Object.freeze({
     CREATE_CATEGORY: 'CREATE_CATEGORY',
     CREATE_CATEGORY_SUCCESS: 'CREATE_CATEGORY_SUCCESS',
     CREATE_CATEGORY_FAILED: 'CREATE_CATEGORY_FAILED',
+    DELETE_CATEGORY: 'DELETE_CATEGORY',
+    DELETE_CATEGORY_SUCCESS: 'DELETE_CATEGORY_SUCCESS',
+    DELETE_CATEGORY_FAILED: 'DELETE_CATEGORY_FAILED',
     FETCH_CATEGORIES: 'FETCH_CATEGORIES',
     FETCH_CATEGORIES_SUCCESS: 'FETCH_CATEGORIES_SUCCESS',
     FETCH_CATEGORIES_FAILED: 'FETCH_CATEGORIES_FAILED',
@@ -85,6 +88,29 @@ export const addCategory = (category) => dispatch => {
         });
 }
 
+export const deleteCategory = (categoryKey) => dispatch => {
+    dispatch({
+        type: CATEGORY.DELETE_CATEGORY,
+        payload: null
+    });
+
+    subCategoriesRef.child(categoryKey).remove()
+        .then(() => {
+            dispatch({
+                type: CATEGORY.DELETE_CATEGORY_SUCCESS,
+                payload: null
+            });
+        }).catch(error => {
+            console.log("CAT-SNAP-E", error);
+            dispatch({
+                type: CATEGORY.DELETE_CATEGORY_FAILED,
+                payload: {
+                    message: "The Category Couldn't be deleted. Please Try Another Name!!"
+                }
+            });
+        })
+}
+
 export const categoryReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case CATEGORY.FETCH_CATEGORIES:
@@ -135,12 +161,36 @@ export const categoryReducer = (state = INITIAL_STATE, action) => {
         case CATEGORY.CREATE_CATEGORY_FAILED:
             return {
                 ...state,
-                categories: null,
                 loading: false,
                 error: {
                     flag: true,
                     msg: action.payload,
                     mode: API_TYPES.POST
+                }
+            };
+        case CATEGORY.DELETE_CATEGORY:
+            return {
+                ...state,
+                loading: true
+            };
+        case CATEGORY.DELETE_CATEGORY_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: {
+                    flag: false,
+                    msg: null,
+                    mode: ""
+                }
+            };
+        case CATEGORY.DELETE_CATEGORY_FAILED:
+            return {
+                ...state,
+                loading: false,
+                error: {
+                    flag: true,
+                    msg: action.payload,
+                    mode: API_TYPES.DELETE
                 }
             };
         default:

@@ -10,13 +10,14 @@ import {
 /** CSS Imports */
 import styles from './ScreenContentLayout.module.scss';
 import utilStyles from '../../styles/utils.module.scss';
+import cx from 'classnames';
 
 /** Other Elements Import */
 import ScreenLayout from '../ScreenLayout';
 
 const ScreenContentLayout = ({ pageTitle, addModalContent, ...props }) => {
     const [openD, setOpenD] = useState(false);
-    
+
 
     return (
         <ScreenLayout>
@@ -26,23 +27,21 @@ const ScreenContentLayout = ({ pageTitle, addModalContent, ...props }) => {
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
                 <Menu secondary size="mini" className={utilStyles.m_0}>
-                    <Menu.Item
-                        name={pageTitle}
-                    >
+                    <Menu.Item>
                         <Header floated="left" as="h4" className={utilStyles.m_0}>
                             {
                                 pageTitle
                             }
                         </Header>
-                    </Menu.Item>
-                    <Menu.Item className={styles.add_menu}>
                         <Modal trigger={
-                            <Button circular size="mini" positive icon
-                                className={utilStyles.p_5}
-                                onClick={() => setOpenD(true)}
-                            >
-                                <Icon name="plus" />
-                            </Button>
+                            <div className={utilStyles.pl_5}>
+                                <Button circular size="mini" positive icon
+                                    className={utilStyles.p_5}
+                                    onClick={() => setOpenD(true)}
+                                >
+                                    <Icon name="plus" />
+                                </Button>
+                            </div>
                         }
                             open={openD}>
                             <Modal.Header className={utilStyles.p_5}>

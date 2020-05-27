@@ -8,19 +8,20 @@ import { addSubCategory, fetchSubCategories } from '../../../redux-store/reduxRe
 /** Semantic Imports */
 import {
     Card, Header, Select, Form, Button, Checkbox, Input, Segment,
-    Message, Dropdown, Icon, Divider, Grid, Label
+    Message, Dropdown, Icon, Divider, Grid, Label, Popup
 } from 'semantic-ui-react';
 
 /** Other Utilities */
 import { API_TYPES } from '../../../global_constants';
 import { useUpdateEffect } from '../../../custom_hooks';
 
-/** Other Elements Import */
-import AddSubCategory from '../AddSubCategory';
-
 /** CSS Imports */
 import utilStyles from '../../../styles/utils.module.scss';
 import styles from './AddCategory.module.scss';
+import cx from 'classnames';
+
+/** Other Components */
+import SubCategoryLabel from './../SubCategoryLabel';
 
 const commissionModeOptions = [
     { key: '0', text: '%', value: '%' },
@@ -167,17 +168,15 @@ const AddCategory = () => {
                         />
                     </div>
                     <Segment basic className={utilStyles.p_0} fluid>
-                        <Grid columns={5}>
+                        <Grid columns={3}>
                             {
                                 subCategories && Object.keys(subCategories).length > 0 &&
                                 Object.keys(subCategories).map(subCatKey => (
-                                    <Grid.Column>
-                                        <Label className={{ ...utilStyles.d_f, ...utilStyles.fd_r }}>
-                                            {
-                                                subCategories[subCatKey].name
-                                            }
-                                            <Icon name="close" />
-                                        </Label>
+                                    <Grid.Column key={subCatKey}>
+                                        <SubCategoryLabel
+                                            name={subCategories[subCatKey].name}
+                                            subCategoryKey={subCatKey}
+                                        />
                                     </Grid.Column>
                                 ))
                             }

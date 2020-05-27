@@ -11,6 +11,9 @@ const SUBCATEGORY = Object.freeze({
     FETCH_SUBCATEGORIES: 'FETCH_SUBCATEGORIES',
     FETCH_SUBCATEGORIES_SUCCESS: 'FETCH_SUBCATEGORIES_SUCCESS',
     FETCH_SUBCATEGORIES_FAILED: 'FETCH_SUBCATEGORIES_FAILED',
+    DELETE_SUBCATEGORY: 'DELETE_SUBCATEGORY',
+    DELETE_SUBCATEGORY_SUCCESS: 'DELETE_SUBCATEGORY_SUCCESS',
+    DELETE_SUBCATEGORY_FAILED: 'DELETE_SUBCATEGORY_FAILED',
     RESET_SUBCATEGORIES: 'RESET_SUBCATEGORIES'
 });
 
@@ -84,6 +87,29 @@ export const addSubCategory = (subCategory) => dispatch => {
         });
 }
 
+export const deleteSubCategory = (subCategoryKey) => dispatch => {
+    dispatch({
+        type: SUBCATEGORY.DELETE_SUBCATEGORY,
+        payload: null
+    });
+
+    subCategoriesRef.child(subCategoryKey).remove()
+        .then(() => {
+            dispatch({
+                type: SUBCATEGORY.DELETE_SUBCATEGORY_SUCCESS,
+                payload: null
+            });
+        }).catch(error => {
+            console.log("CAT-SNAP-E", error);
+            dispatch({
+                type: SUBCATEGORY.DELETE_SUBCATEGORY_FAILED,
+                payload: {
+                    message: "The Sub Category Couldn't be deleted. Please Try Another Name!!"
+                }
+            });
+        })
+}
+
 export const subCategoryReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case SUBCATEGORY.FETCH_SUBCATEGORIES:
@@ -131,12 +157,36 @@ export const subCategoryReducer = (state = INITIAL_STATE, action) => {
         case SUBCATEGORY.CREATE_SUBCATEGORY_FAILED:
             return {
                 ...state,
-                subCategories: null,
                 loading: false,
                 error: {
                     flag: true,
                     msg: action.payload,
                     mode: API_TYPES.POST
+                }
+            };
+        case SUBCATEGORY.DELETE_SUBCATEGORY:
+            return {
+                ...state,
+                loading: true
+            };
+        case SUBCATEGORY.DELETE_SUBCATEGORY_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: {
+                    flag: false,
+                    msg: null,
+                    mode: ""
+                }
+            };
+        case SUBCATEGORY.DELETE_SUBCATEGORY_FAILED:
+            return {
+                ...state,
+                loading: false,
+                error: {
+                    flag: true,
+                    msg: action.payload,
+                    mode: API_TYPES.DELETE
                 }
             };
         default:

@@ -6,6 +6,7 @@ import { Card, Image, Button, Header, Label, Icon, Modal, Menu } from 'semantic-
 /** CSS Imports */
 import utilStyles from '../../../styles/utils.module.scss';
 import styles from './CategoryCard.module.scss';
+import cx from 'classnames';
 
 /** Other Elements Import */
 import AddCategory from '../AddCategory';
@@ -22,12 +23,13 @@ const CategoryCard = ({ key, category, categoryKey }) => {
             <Card size="small" className={utilStyles.p_5}
                 onClick={() => setOpenD(true)}
             >
-                <Image
-                    size="mini"
-                    src="https://react.semantic-ui.com/images/wireframe/image.png"
-                    wrapped
-                    ui={false}
-                />
+                <div className={cx(utilStyles.p_5, utilStyles.d_f, utilStyles.jc_c, styles.category_img)}>
+                    <Image
+                        size="mini"
+                        src="/images/category.svg"
+                        style={{ width: 60, height: 60 }}
+                    />
+                </div>
                 <Card.Content className={utilStyles.p_5}>
                     <div className={styles.category_header}>
                         <h5 textAlign="right" className={utilStyles.m_0}>{category.name}</h5>
