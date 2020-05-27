@@ -8,7 +8,7 @@ import { FirebaseConfig } from "./config";
 
 
 // Check that `window` is in scope for the analytics module!
-if (!firebase.apps.length) {
+if (window !== undefined && !firebase.apps.length) {
     firebase.initializeApp(FirebaseConfig)
     firebase.analytics();
 }
